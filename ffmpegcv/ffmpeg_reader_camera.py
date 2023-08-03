@@ -254,7 +254,7 @@ class FFmpegReaderCAM:
         campix_fmt=None,
         step=1,
     ):
-        assert pix_fmt in ["rgb24", "bgr24", "yuv420p", "nv12"]
+        assert pix_fmt in ["rgb24", "bgr24", "yuv420p", "nv12", "gray16le", "gray16be", "gray"]
 
         vid = FFmpegReaderCAM()
         if this_os == platform.mac:
@@ -391,6 +391,9 @@ class FFmpegReaderCAM:
             "bgr24": (vid.height, vid.width, 3),
             "yuv420p": (int(vid.height * 1.5), vid.width),
             "nv12": (int(vid.height * 1.5), vid.width),
+            "gray16le": (vid.height, vid.width, 2),
+            "gray16be": (vid.height, vid.width, 2),
+            "gray": (vid.height, vid.width, 1),
         }[pix_fmt]
         vid.process = run_async(args)
 

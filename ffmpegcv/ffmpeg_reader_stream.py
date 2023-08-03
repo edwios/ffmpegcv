@@ -17,7 +17,7 @@ class FFmpegReaderStream(FFmpegReaderCAM):
         resize_keepratio,
         resize_keepratioalign,
     ):
-        assert pix_fmt in ["rgb24", "bgr24", "yuv420p", "nv12"]
+        assert pix_fmt in ["rgb24", "bgr24", "yuv420p", "nv12", "gray16le", "gray16be", "gray"]
         vid = FFmpegReaderStream()
         videoinfo = get_info(stream_url)
         vid.width, vid.height = videoinfo.width, videoinfo.height
@@ -91,6 +91,9 @@ class FFmpegReaderStream(FFmpegReaderCAM):
             "bgr24": (vid.height, vid.width, 3),
             "nv12": (int(vid.height * 1.5), vid.width),
             "yuv420p": (int(vid.height * 1.5), vid.width),
+            "gray16le": (vid.height, vid.width, 2),
+            "gray16be": (vid.height, vid.width, 2),
+            "gray": (vid.height, vid.width),
         }[pix_fmt]
         vid.process = run_async(args)
 

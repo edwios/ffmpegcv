@@ -6,7 +6,7 @@ class FFmpegWriterStreamRT(FFmpegWriter):
     @staticmethod
     def VideoWriter(filename:str, codec, pix_fmt, bitrate=None) -> FFmpegWriter:
         assert codec in ['h264', 'libx264', 'x264']
-        assert pix_fmt in ['bgr24', 'rgb24']
+        assert pix_fmt in ['bgr24', 'rgb24', 'gray16le', 'gray16be', 'gray']
         assert filename.startswith('rtmp://'), 'currently only support rtmp'
         vid = FFmpegWriterStreamRT()
         vid.filename = filename
